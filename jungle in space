@@ -1,0 +1,38 @@
+//jungle in space
+//by vadim_art
+gradient(0.115)
+	.colorama(0.003).modulate(voronoi(8000,1),0.008)
+	.colorama(0.032).modulate(voronoi(8000,1),0.008)
+	.colorama(0.008).modulate(voronoi(8000,1),0.008)
+	.colorama(0.086)
+	.colorama(0.121)
+	.colorama(0.071)
+	.colorama(0.186)
+	.colorama(0.071)
+	.color(20, ({time}) => Math.sin(time * 1.062), ({time}) => Math.sin(time / 3.608))
+	.luma(0.9, 1.05)
+.out(o0);
+
+noise(0.5, 0.1)
+	.colorama(({time}) => Math.sin(time / 5))
+.out(o1);
+
+src(o0)
+	.mult(src(o1))
+	.diff(src(o0))
+	.rotate(0.1, -0.9)
+	.modulateRotate(o0)
+	.color(3.1,2.5,10.8)
+	.mult(shape(4,0.6,.01).scale(1,.6,1))
+	.add(src(o3))
+.out(o2);
+
+voronoi(350,0.15)
+  	.thresh(0.83)
+	.thresh(0.7)
+	.modulateScale(osc(2).modulateRotate(o0,0.74))
+	.brightness([0.02,-0.17].smooth().fast(1.5))
+.out(o3)
+
+speed = 0.3
+render(o2);
