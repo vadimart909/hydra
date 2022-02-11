@@ -1,0 +1,21 @@
+
+osc(6,0.5,[0.2,1.4].fast(1).smooth()).rotate(()=>time*0.5).scale(1,0.9,0.9)
+.out(o0)
+
+s0.initVideo("https://i.imgur.com/WRoQJAl.mp4");
+src(s0)
+	.saturate(2)
+	.contrast(2.381)
+	.color(16.742, () => Math.sin(time * 1.062), () => Math.sin(time * 3.608))
+.mult(shape(90,0.6,.01).scale(1.5,.6,1))
+.add(src(o0)).mask(shape(70,0.75,.15)).modulate(src(o0)).out(o1)
+
+s1.initVideo("https://i.imgur.com/WRoQJAl.mp4");
+src(s1)
+	.saturate(2)
+	.contrast(2.381)
+	.color(16.742, () => Math.sin(time * 1.062), () => Math.sin(time * 3.608))
+.mult(shape(90,0.6,.01).scale(1.5,.6,1))
+.add(src(o1)).mask(shape(70,0.75,.15)).modulate(src(o1)).out(o2)
+
+render(o2)
