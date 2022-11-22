@@ -1,0 +1,7 @@
+
+s0.initCam()
+src(o0) 
+	.scale(1.01)
+	.layer(src(s0).invert(({time}) => Math.sin(time) * 0.3).luma().mult(osc(1,0.1,10)))
+	.saturate( ({time}) => Math.sin(time) * 1 )
+  .out()
