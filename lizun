@@ -1,0 +1,31 @@
+// LIZUN
+// don't forget render(o0)
+const {
+	sculptToHydraRenderer
+} = await import("https://unpkg.com/shader-park-core/dist/shader-park-core.esm.js")
+
+sculptToHydraRenderer(() => {
+		let scale = 2.0;
+		let s = getSpace();
+		let n = 0.3 * noise(scale * s + time/4);
+		color(normal.x, normal.y, normal.z);
+		shine(0.9);
+		metal(.9);
+		rotateY(time / 2);
+		rotateX(time);
+		//grid(2, .1, .1);
+		union();
+		rotateY(-time);
+		sphere(0.3 + n);
+	})
+	.out(o0)
+
+src(o1)
+	.layer(src(o0)
+		.luma(0.01, 0)
+		.saturate(0)
+		.mult(osc(130, 0.1, [0,0,2].smooth())
+		.modulate(src(o0))))
+	.out(o1)
+
+render(o1)
